@@ -1,0 +1,15 @@
+import 'package:flutter/material.dart';
+
+//colors use in app
+const brightness = Brightness.light;
+const dark = Brightness.dark;
+const background = Color.fromARGB(255, 245, 245, 245);
+const primary = Color.fromARGB(255, 106, 209, 255);
+const secondary = Color.fromARGB(255, 0, 104, 173);
+const onPrimary = Colors.white;
+const onSecondary = Colors.black;
+
+const vodcast = Color.fromARGB(255, 0, 128, 0);
+const onVodcast = Color.fromARGB(255, 218, 254, 218);
+const podcast = Color.fromARGB(255, 255, 165, 0);
+const onPodcast = Color.fromARGB(255, 254, 242, 218);
