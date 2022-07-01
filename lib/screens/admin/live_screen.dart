@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:musicplayer/constant.dart';
+import 'package:musicplayer/widgets/navigationdrawer_widget.dart';
 
 class LiveScreen extends StatefulWidget {
   LiveScreen({Key? key}) : super(key: key);
@@ -11,7 +13,16 @@ class _LiveScreenState extends State<LiveScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(),
+      child: Scaffold(
+        backgroundColor: background,
+        drawer: NavigationDrawerWidget(),
+        appBar: AppBar(
+          title: const Text('Live'),
+        ),
+        body: Container(
+          child: const Text('Livee'),
+        ),
+      ),
     );
   }
 }
