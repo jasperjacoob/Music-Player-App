@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musicplayer/routes.dart';
 import 'package:musicplayer/screens/admin/dashboard_screen.dart';
 import 'package:musicplayer/screens/auth/signin_screen.dart';
 
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      onGenerateRoute: generateRoute,
       home: SigninScreen(),
     );
   }
