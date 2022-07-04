@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musicplayer/constant.dart';
-import 'package:musicplayer/widgets/navigationdrawer_widget.dart';
+import 'package:musicplayer/widgets/navdrawer_widget.dart';
 
 class LiveScreen extends StatefulWidget {
   LiveScreen({Key? key}) : super(key: key);

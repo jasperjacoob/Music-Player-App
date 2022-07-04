@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musicplayer/constant.dart';
-import 'package:musicplayer/widgets/navigationdrawer_widget.dart';
+import 'package:musicplayer/widgets/navdrawer_widget.dart';
 
 class FbliveScreen extends StatefulWidget {
   FbliveScreen({Key? key}) : super(key: key);

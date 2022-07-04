@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musicplayer/screens/admin/dashboard_screen.dart';
+import 'package:musicplayer/screens/client/musiccli_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           // primarySwatch: Colors.blue,
           ),
-      home: DashboardScreen(),
+      home: MusiccliScreen(),
     );
   }
 }
