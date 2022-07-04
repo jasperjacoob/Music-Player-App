@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:musicplayer/constant.dart';
+import 'package:musicplayer/widgets/navdrawer_widget.dart';
 
 class FbliveScreen extends StatefulWidget {
   FbliveScreen({Key? key}) : super(key: key);
@@ -11,7 +13,16 @@ class _FbliveScreenState extends State<FbliveScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(),
+      child: Scaffold(
+        backgroundColor: background,
+        drawer: NavigationDrawerWidget(),
+        appBar: AppBar(
+          title: const Text('FB Live'),
+        ),
+        body: Container(
+          child: const Text('Livee'),
+        ),
+      ),
     );
   }
 }
