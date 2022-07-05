@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:musicplayer/constant.dart';
+import 'package:musicplayer/provider/entertainmentprovider.dart';
 import 'package:musicplayer/screens/admin/dashboard_screen.dart';
 import 'package:musicplayer/screens/admin/fblive_screen.dart';
 import 'package:musicplayer/screens/admin/live_screen.dart';
 import 'package:musicplayer/screens/admin/podcast_screen.dart';
 import 'package:musicplayer/screens/admin/vodcast_screen.dart';
+import 'package:provider/provider.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   final padding = const EdgeInsets.symmetric(horizontal: 20);
