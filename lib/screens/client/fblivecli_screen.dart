@@ -15,7 +15,7 @@ class _FblivecliScreenState extends State<FblivecliScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: background,
-        drawer: ClientDrawerWidget(),
+        // drawer: ClientDrawerWidget(),
         appBar: AppBar(
           title: const Text('Fb Live'),
         ),
