@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musicplayer/routes.dart';
 import 'package:musicplayer/screens/admin/dashboard_screen.dart';
 import 'package:musicplayer/screens/client/musiccli_screen.dart';
 
@@ -15,9 +16,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-          // primarySwatch: Colors.blue,
-          ),
-      home: MusiccliScreen(),
+        primarySwatch: Colors.blue,
+      ),
+      onGenerateRoute: generateRoute,
     );
   }
 }

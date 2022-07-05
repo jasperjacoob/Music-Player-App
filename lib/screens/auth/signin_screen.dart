@@ -13,6 +13,7 @@ class SigninScreen extends StatefulWidget {
 class _SigninScreenState extends State<SigninScreen> {
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
           backgroundColor: primary,
@@ -20,21 +21,39 @@ class _SigninScreenState extends State<SigninScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Image.asset(
-                  'assets/images/smlogo.png',
-                  scale: 6,
+                Container(
+                  height: height * .30,
+                  child: Image.asset(
+                    'assets/images/smlogo.png',
+                    scale: 6,
+                  ),
                 ),
                 Expanded(
                   child: ClipPath(
                     clipper: ClipBox(),
                     child: Container(
+                      padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: background,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Sign In"),
+                          TextFormField(),
+                          TextFormField(),
+                          ElevatedButton(
+                              onPressed: onPressed, child: Text("Sign in"))
+                        ],
                       ),
                     ),
                   ),
                 )
               ])),
     );
+  }
+
+  void onPressed() {
+    Navigator.of(context).popAndPushNamed(dashboardRoute);
   }
 }
