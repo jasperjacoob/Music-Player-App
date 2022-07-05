@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:musicplayer/routes.dart';
 import 'package:musicplayer/screens/admin/dashboard_screen.dart';
+import 'package:musicplayer/screens/auth/signin_screen.dart';
 import 'package:musicplayer/screens/client/musiccli_screen.dart';
 
 void main() {
@@ -14,11 +15,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      onGenerateRoute: generateRoute,
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        onGenerateRoute: generateRoute,
+        home: SigninScreen());
   }
 }
