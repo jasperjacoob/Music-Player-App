@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:musicplayer/routes.dart';
 import 'package:musicplayer/screens/admin/dashboard_screen.dart';
-import 'package:musicplayer/screens/auth/signin_screen.dart';
+import 'package:musicplayer/screens/client/musiccli_screen.dart';
 
 void main() {
   runApp(const MyApp());
