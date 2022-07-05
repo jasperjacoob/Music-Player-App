@@ -13,7 +13,8 @@ const onError = Colors.white;
 const onBackground = Colors.black;
 const surface = Colors.white;
 const onSurface = Colors.black;
-
+const hoverColor = Colors.white70;
+const onTertiary = Color.fromARGB(255, 93, 93, 93);
 const vodcast = Color.fromARGB(255, 0, 128, 0);
 const onVodcast = Color.fromARGB(255, 218, 254, 218);
 const podcast = Color.fromARGB(255, 255, 165, 0);
