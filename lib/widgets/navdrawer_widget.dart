@@ -31,11 +31,23 @@ class NavigationDrawerWidget extends StatelessWidget {
           buildMenuItem2(
               text: 'Events', icon: MdiIcons.calendarTextOutline, context),
           ElevatedButton(
-              style: ElevatedButton.styleFrom(primary: secondary),
+              style: ElevatedButton.styleFrom(primary: onPrimary),
               onPressed: () {},
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [Text('Create Account'), Icon(MdiIcons.plus)],
+                children: [
+                  Text(
+                    'Create Account',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        ?.copyWith(color: secondary),
+                  ),
+                  const Icon(
+                    MdiIcons.plus,
+                    color: secondary,
+                  )
+                ],
               ))
         ],
       ),
@@ -50,11 +62,13 @@ class NavigationDrawerWidget extends StatelessWidget {
     return ListTile(
       leading: Icon(
         icon,
+        size: 30,
         color: onTertiary,
       ),
       title: Text(
         text,
-        style: const TextStyle(color: onTertiary),
+        style: const TextStyle(
+            color: onTertiary, fontFamily: 'Inter', fontSize: 16),
       ),
       hoverColor: hoverColor,
       onTap: onClicked,
@@ -72,6 +86,7 @@ class NavigationDrawerWidget extends StatelessWidget {
       leading: Icon(
         icon,
         color: onTertiary,
+        size: 30,
       ),
       title: Text(
         text,
