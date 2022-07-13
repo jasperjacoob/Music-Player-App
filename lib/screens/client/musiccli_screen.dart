@@ -31,13 +31,13 @@ class _MusiccliScreenState extends State<MusiccliScreen> {
                           child: Container(
                             padding: const EdgeInsets.all(8.0),
                             child: FloatingActionButton(
-                              backgroundColor: onPrimary,
+                              backgroundColor: secondary,
                               onPressed: () {
                                 Scaffold.of(context).openDrawer();
                               },
                               child: const Icon(
                                 MdiIcons.menu,
-                                color: secondary,
+                                color: onPrimary,
                               ),
                             ),
                           ),

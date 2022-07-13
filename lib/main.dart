@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: defaultThemeData,
-      home: DashboardScreen(),
+      home: MusiccliScreen(),
     );
   }
 }

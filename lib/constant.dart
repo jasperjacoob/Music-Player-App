@@ -23,3 +23,5 @@ const podcast = Color.fromARGB(255, 255, 165, 0);
 const onPodcast = Color.fromARGB(255, 254, 242, 218);
 const hoverColor = Colors.white70;
 const onTertiary = Color.fromARGB(255, 93, 93, 93);
+
+//screens in app

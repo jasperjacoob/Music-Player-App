@@ -5,7 +5,7 @@ ThemeData get defaultThemeData {
   return ThemeData.light().copyWith(
       canvasColor: background,
       scaffoldBackgroundColor: onBackground,
-      appBarTheme: const AppBarTheme(backgroundColor: background),
+      appBarTheme: const AppBarTheme(backgroundColor: secondary),
       colorScheme: const ColorScheme(
           brightness: brightness,
           primary: onPrimary,
