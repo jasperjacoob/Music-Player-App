@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:musicplayer/constant.dart';
 import 'package:musicplayer/widgets/clientappbar_widget.dart';
 import 'package:musicplayer/widgets/clientdrawer_widget.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class PodcastcliScreen extends StatefulWidget {
   PodcastcliScreen({Key? key}) : super(key: key);
@@ -12,6 +15,8 @@ class PodcastcliScreen extends StatefulWidget {
 }
 
 class _PodcastcliScreenState extends State<PodcastcliScreen> {
+  WebViewController? _controller;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

@@ -1,0 +1,21 @@
+POST http://www.avsoundstation.com/api/login
+Content-Type: application/json
+
+{
+    "email" : "user@user.com",
+	"password" : "password123"
+}
+
+###
+
+GET http://www.avsoundstation.com/api/fb-live
+Authorization: Bearer 49|jrtBtox7e21Y5KYXsoKhK3cLOHiKwmSAvFe0EV6r
+
+### 
+GET http://www.avsoundstation.com/api/user
+Authorization: Bearer 9|vouk8TNqSsvuM10nQVktfw5dj0GabMYr1dH1R8Rc
+
+
+### 
+POST http://www.avsoundstation.com/api/logout
+Authorization: Bearer 8|HZVIegiWlCSqAWVGN25KQPMWQy0hD4y97Ikp7Xxa

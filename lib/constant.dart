@@ -17,11 +17,14 @@ const onBackground = Color.fromARGB(255, 235, 235, 235);
 const surface = Color.fromARGB(0, 66, 66, 65);
 const onSurface = Color.fromARGB(90, 66, 66, 65);
 
+const hoverColor = Colors.white70;
+const onTertiary = Color.fromARGB(255, 93, 93, 93);
 const vodcast = Color.fromARGB(255, 0, 128, 0);
 const onVodcast = Color.fromARGB(255, 218, 254, 218);
 const podcast = Color.fromARGB(255, 255, 165, 0);
 const onPodcast = Color.fromARGB(255, 254, 242, 218);
-const hoverColor = Colors.white70;
-const onTertiary = Color.fromARGB(255, 93, 93, 93);
 
-//screens in app
+const playerUrl = "http://stream.zeno.fm/a788tyayyuhvv";
+//routes
+const dashboardRoute = '/dashboard';
+const signinRoute = '/login';

@@ -16,7 +16,7 @@ class _FblivecliScreenState extends State<FblivecliScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer: const ClientDrawerWidget(),
+        drawer: ClientDrawerWidget(),
         appBar: ClientAppBar(),
         body: Column(
           children: [
