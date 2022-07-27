@@ -6,7 +6,9 @@ import 'package:audio_session/audio_session.dart';
 import 'dart:developer';
 import 'package:just_audio/just_audio.dart';
 import 'package:musicplayer/widgets/clientdrawer_widget.dart';
+
 import 'package:provider/provider.dart';
+import 'package:volume_controller/volume_controller.dart';
 
 class MusiccliScreen extends StatefulWidget {
   MusiccliScreen({Key? key}) : super(key: key);
@@ -17,34 +19,49 @@ class MusiccliScreen extends StatefulWidget {
 
 class _MusiccliScreenState extends State<MusiccliScreen>
     with WidgetsBindingObserver {
+  double value = 0;
   AudioPlayer player = AudioPlayer();
-
+  bool isEnabled = false;
   void initState() {
-    super.initState();
-
+    VolumeController().listener((volume) {
+      setState(() {
+        value = volume;
+      });
+    });
     _init();
+    super.initState();
+  }
+
+  void onChanged(data) async {
+    VolumeController().setVolume(data, showSystemUI: false);
+    setState(() {
+      value = data;
+    });
   }
 
   Future<void> _init() async {
     try {
       final session = await AudioSession.instance;
-
+      value = await VolumeController().getVolume();
       await session.configure(const AudioSessionConfiguration.speech());
 
       player.playbackEventStream.listen((event) {},
           onError: (Object e, StackTrace stackTrace) {
         print('A stream error occurred: $e');
       });
-      await player.setAudioSource(
-          AudioSource.uri(Uri.parse("http://stream.zeno.fm/a788tyayyuhvv")));
+      await player.setAudioSource(AudioSource.uri(Uri.parse(playerUrl)));
       if (!player.playing) {
-        await player.play();
+        setState(() {
+          player.play();
+          isEnabled = true;
+        });
       }
     } catch (e) {}
   }
 
   @override
   void dispose() {
+    VolumeController().removeListener();
     player.dispose();
     super.dispose();
   }
@@ -111,6 +128,27 @@ class _MusiccliScreenState extends State<MusiccliScreen>
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30),
                         )),
+                    child: Column(
+                      children: [
+                        Slider(value: value, onChanged: onChanged),
+                        GestureDetector(
+                          onTap: () {
+                            if (isEnabled) {
+                              setState(() {
+                                if (player.playing) {
+                                  player.pause();
+                                } else {
+                                  player.play();
+                                }
+                              });
+                            }
+                          },
+                          child: Icon(
+                            player.playing ? Icons.pause : Icons.play_arrow,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ]);
