@@ -23,3 +23,4 @@ const onPodcast = Color.fromARGB(255, 254, 242, 218);
 const playerUrl = "http://stream.zeno.fm/a788tyayyuhvv";
 //routes
 const dashboardRoute = '/dashboard';
+const signinRoute = '/login';
