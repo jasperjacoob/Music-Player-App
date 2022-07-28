@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:musicplayer/constant.dart';
@@ -8,7 +10,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:musicplayer/widgets/clientdrawer_widget.dart';
 
 import 'package:provider/provider.dart';
-import 'package:volume_controller/volume_controller.dart';
+
 
 class MusiccliScreen extends StatefulWidget {
   MusiccliScreen({Key? key}) : super(key: key);
@@ -19,21 +21,29 @@ class MusiccliScreen extends StatefulWidget {
 
 class _MusiccliScreenState extends State<MusiccliScreen>
     with WidgetsBindingObserver {
+  bool _visible = true;
   double value = 0;
   AudioPlayer player = AudioPlayer();
   bool isEnabled = false;
   void initState() {
-    VolumeController().listener((volume) {
-      setState(() {
-        value = volume;
-      });
-    });
     _init();
+
     super.initState();
   }
 
+  void onChangedDragEnd(data) async {
+    if (!player.playing) {
+      setState(() {
+        value = data;
+      });
+      return;
+    }
+    setState(() {
+      value = 0;
+    });
+  }
+
   void onChanged(data) async {
-    VolumeController().setVolume(data, showSystemUI: false);
     setState(() {
       value = data;
     });
@@ -42,7 +52,7 @@ class _MusiccliScreenState extends State<MusiccliScreen>
   Future<void> _init() async {
     try {
       final session = await AudioSession.instance;
-      value = await VolumeController().getVolume();
+
       await session.configure(const AudioSessionConfiguration.speech());
 
       player.playbackEventStream.listen((event) {},
@@ -61,7 +71,6 @@ class _MusiccliScreenState extends State<MusiccliScreen>
 
   @override
   void dispose() {
-    VolumeController().removeListener();
     player.dispose();
     super.dispose();
   }
@@ -74,6 +83,7 @@ class _MusiccliScreenState extends State<MusiccliScreen>
     }
   }
 
+  void animatedPlayer() {}
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -94,13 +104,13 @@ class _MusiccliScreenState extends State<MusiccliScreen>
                           child: Container(
                             padding: const EdgeInsets.all(8.0),
                             child: FloatingActionButton(
-                              backgroundColor: onPrimary,
+                              backgroundColor: secondary,
                               onPressed: () {
                                 Scaffold.of(context).openDrawer();
                               },
                               child: const Icon(
                                 MdiIcons.menu,
-                                color: secondary,
+                                color: onPrimary,
                               ),
                             ),
                           ),
@@ -130,23 +140,37 @@ class _MusiccliScreenState extends State<MusiccliScreen>
                         )),
                     child: Column(
                       children: [
-                        Slider(value: value, onChanged: onChanged),
-                        GestureDetector(
-                          onTap: () {
-                            if (isEnabled) {
-                              setState(() {
-                                if (player.playing) {
-                                  player.pause();
-                                } else {
-                                  player.play();
-                                }
-                              });
-                            }
-                          },
-                          child: Icon(
-                            player.playing ? Icons.pause : Icons.play_arrow,
-                          ),
+                        Slider(
+                          value: value,
+                          onChangeEnd: onChangedDragEnd,
+                          onChanged: onChanged,
                         ),
+                        GestureDetector(
+                            onTap: () {
+                              if (isEnabled) {
+                                setState(() {
+                                  if (player.playing) {
+                                    player.pause();
+                                  } else {
+                                    setState(() {
+                                      value = 0;
+                                    });
+                                    player.play();
+                                  }
+                                });
+                              }
+                            },
+                            child: AnimatedOpacity(
+                                // If the widget is visible, animate to 0.0 (invisible).
+                                // If the widget is hidden, animate to 1.0 (fully visible).
+                                opacity: _visible ? 1.0 : 0.0,
+                                duration: const Duration(milliseconds: 500),
+                                // The green box must be a child of the AnimatedOpacity widget.
+                                child: Icon(
+                                  player.playing
+                                      ? Icons.pause
+                                      : Icons.play_arrow,
+                                ))),
                       ],
                     ),
                   ),
