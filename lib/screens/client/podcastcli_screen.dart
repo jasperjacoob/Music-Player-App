@@ -21,7 +21,7 @@ class _PodcastcliScreenState extends State<PodcastcliScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer: ClientAppBar(),
+        drawer: ClientAppBar(title: "Podcast"),
         body: Column(
           children: [
             Container(

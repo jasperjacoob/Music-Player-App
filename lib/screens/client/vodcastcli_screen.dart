@@ -17,7 +17,7 @@ class _VodcastcliScreenState extends State<VodcastcliScreen> {
     return SafeArea(
       child: Scaffold(
         drawer: ClientDrawerWidget(),
-        appBar: ClientAppBar(),
+        appBar: ClientAppBar(title: "Vodcast"),
         body: Column(
           children: [
             Container(
