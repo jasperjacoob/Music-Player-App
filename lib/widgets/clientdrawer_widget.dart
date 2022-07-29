@@ -18,7 +18,7 @@ import 'package:http/http.dart' as http;
 import '../model/user.dart';
 
 class ClientDrawerWidget extends StatelessWidget {
-  final padding = const EdgeInsets.symmetric(horizontal: 20);
+  final padding = const EdgeInsets.symmetric(horizontal: 16);
 
   ClientDrawerWidget({Key? key}) : super(key: key);
 

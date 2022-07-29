@@ -11,7 +11,6 @@ import 'package:musicplayer/widgets/clientdrawer_widget.dart';
 
 import 'package:provider/provider.dart';
 
-
 class MusiccliScreen extends StatefulWidget {
   MusiccliScreen({Key? key}) : super(key: key);
 
@@ -104,7 +103,7 @@ class _MusiccliScreenState extends State<MusiccliScreen>
                           child: Container(
                             padding: const EdgeInsets.all(8.0),
                             child: FloatingActionButton(
-                              backgroundColor: secondary,
+                              backgroundColor: background,
                               onPressed: () {
                                 Scaffold.of(context).openDrawer();
                               },

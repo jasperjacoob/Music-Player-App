@@ -15,8 +15,6 @@ class PodcastcliScreen extends StatefulWidget {
 }
 
 class _PodcastcliScreenState extends State<PodcastcliScreen> {
-  WebViewController? _controller;
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,7 +25,7 @@ class _PodcastcliScreenState extends State<PodcastcliScreen> {
             Container(
               padding: padding,
               child: Text(
-                'Vodcast',
+                'Podcast',
                 style: Theme.of(context).textTheme.headline1,
               ),
             ),

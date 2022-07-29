@@ -25,44 +25,82 @@ class _SigninScreenState extends State<SigninScreen> {
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
-          backgroundColor: primary,
+          backgroundColor: background,
           body: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Container(
-                  height: height * .30,
-                  child: Image.asset(
-                    'assets/images/smlogo.png',
-                    scale: 6,
-                  ),
-                ),
                 Expanded(
                   child: ClipPath(
                     clipper: ClipBox(),
                     child: Container(
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: background,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Sign In"),
-                          TextFormField(
-                            controller: emailController,
-                            keyboardType: TextInputType.emailAddress,
-                          ),
-                          TextFormField(
-                            controller: passwordController,
-                            keyboardType: TextInputType.visiblePassword,
-                          ),
-                          ElevatedButton(
-                              onPressed: onPressed, child: Text("Sign in"))
-                        ],
+                      padding: const EdgeInsets.only(top: 8, bottom: 40),
+                      color: primary,
+                      child: Image.asset(
+                        'assets/images/sm.png',
+                        scale: 10,
                       ),
                     ),
                   ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 8,
+                  ),
+                  margin: const EdgeInsets.only(bottom: 24),
+                  decoration: const BoxDecoration(color: background),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Sign In",
+                          style: Theme.of(context).textTheme.headline2,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          style: const TextStyle(color: onSecondary),
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: const InputDecoration(
+                            hintText: "Email",
+                            labelText: "Email",
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          style: const TextStyle(color: onSecondary),
+                          controller: passwordController,
+                          keyboardType: TextInputType.visiblePassword,
+                          decoration: const InputDecoration(
+                            hintText: "Password",
+                            labelText: "Password",
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                            onPressed: onPressed,
+                            child: Text(
+                              "Sign in",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline3
+                                  ?.copyWith(color: Colors.white),
+                            )),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 50,
                 )
               ])),
     );
