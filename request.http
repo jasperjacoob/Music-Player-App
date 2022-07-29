@@ -8,12 +8,14 @@ Content-Type: application/json
 
 ###
 
-GET http://www.avsoundstation.com/api/fb-live
-Authorization: Bearer 49|jrtBtox7e21Y5KYXsoKhK3cLOHiKwmSAvFe0EV6r
+GET http://www.avsoundstation.com/api/vodcast
+Authorization: Bearer 58|4Ssq15eJ9UXRZVNxDIA3LhLnrIlo6lCIuubyKLNx
 ###
 GET https://graph.facebook.com/v14.0/447987817190427?fields=embed_html&access_token=EABKJd2InuyUBALUSqyolbK5chdiZBdFDtD54DqdxD59jtzPGNNYmZBeBZAgYBSZAwynTba3vTp5Xi9zZB9UttSO6y98ZAI3dOFUCT3Td4kQYrxIEZCf7bIA5vsNoXk6904dmd9wVlhyA2CVUzCA3L26HkZAxtpsGJ6zayOBX2PTHpjJYM5TjvPAdTQ5MXoMLfogKH1utIfxFUs6tsKUFZBJ7kFZBjWAKsHkoqF9YOpUzWvhwfgvuatjV7t
 
-
+###
+GET http://www.avsoundstation.com/api/image-music-background/ *-
+Authorization: Bearer 58|4Ssq15eJ9UXRZVNxDIA3LhLnrIlo6lCIuubyKLNx
 ### 
 GET http://www.avsoundstation.com/api/user
 Authorization: Bearer 9|vouk8TNqSsvuM10nQVktfw5dj0GabMYr1dH1R8Rc

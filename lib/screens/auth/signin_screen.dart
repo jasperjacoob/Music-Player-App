@@ -19,7 +19,7 @@ class SigninScreen extends StatefulWidget {
 class _SigninScreenState extends State<SigninScreen> {
   TextEditingController emailController = TextEditingController(text: "");
   TextEditingController passwordController = TextEditingController(text: "");
-
+  bool isenabled = true;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -68,40 +68,105 @@ class _SigninScreenState extends State<SigninScreen> {
     );
   }
 
+  Future<void> _showMySucessDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('AlertDialog Title'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Success'),
+                Text('Login Succesfully'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Approve'),
+              onPressed: () {
+                Navigator.of(context).popAndPushNamed(dashboardRoute);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _showMyErrorDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Error'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('No user found'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Approve'),
+              onPressed: () {
+                setState(() {
+                  isenabled = true;
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void onPressed() async {
-    FlutterSecureStorage storage = const FlutterSecureStorage();
-    Map<String, String> requestHeaders = {
-      'Content-type': 'application/json',
-      'Accept': 'application/json',
-    };
-    Map<String, String> body = {
-      'email': emailController.text,
-      'password': passwordController.text,
-    };
-    Response response = await http.post(
-        Uri.parse("http://www.avsoundstation.com/api/login"),
-        headers: requestHeaders,
-        body: jsonEncode(body));
-    Map<String, dynamic> token = jsonDecode(response.body);
-    if (token['message'] != null) {
-      debugPrint("unauthenticated");
-      return;
+    if (isenabled) {
+      debugPrint("PINDOT");
+      setState(() {
+        isenabled = false;
+      });
+      FlutterSecureStorage storage = const FlutterSecureStorage();
+      Map<String, String> requestHeaders = {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      };
+      Map<String, String> body = {
+        'email': emailController.text,
+        'password': passwordController.text,
+      };
+      Response response = await http.post(
+          Uri.parse("http://www.avsoundstation.com/api/login"),
+          headers: requestHeaders,
+          body: jsonEncode(body));
+      Map<String, dynamic> token = jsonDecode(response.body);
+      if (token['message'] != null) {
+        _showMyErrorDialog();
+        return;
+      }
+      await storage.write(key: "token", value: token['access_token']);
+      String currentToken = token["access_token"];
+      Map<String, String> userHeader = {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $currentToken'
+      };
+
+      Response userRes = await http.get(
+          Uri.parse("http://www.avsoundstation.com/api/user"),
+          headers: userHeader);
+      User currentUser = User.fromMap(jsonDecode(userRes.body));
+      currentUser.token = currentToken;
+
+      Provider.of<User>(context, listen: false).setUser(currentUser);
+      _showMySucessDialog();
     }
-    await storage.write(key: "token", value: token['access_token']);
-    String currentToken = token["access_token"];
-    Map<String, String> userHeader = {
-      'Content-type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $currentToken'
-    };
-
-    Response userRes = await http.get(
-        Uri.parse("http://www.avsoundstation.com/api/user"),
-        headers: userHeader);
-    User currentUser = User.fromMap(jsonDecode(userRes.body));
-    currentUser.token = currentToken;
-    Provider.of<User>(context, listen: false).setUser(currentUser);
-
-    Navigator.of(context).popAndPushNamed(dashboardRoute);
+    debugPrint("NO CLICKed");
   }
 }
