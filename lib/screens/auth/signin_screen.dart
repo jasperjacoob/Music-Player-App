@@ -87,7 +87,8 @@ class _SigninScreenState extends State<SigninScreen> {
             TextButton(
               child: const Text('Approve'),
               onPressed: () {
-                Navigator.of(context).popAndPushNamed(dashboardRoute);
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil(dashboardRoute, (route) => false);
               },
             ),
           ],
