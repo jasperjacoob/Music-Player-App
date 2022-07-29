@@ -110,6 +110,7 @@ selectedItem(BuildContext context, int i) async {
       debugPrint(logoutRes.body);
       if (jsonDecode(logoutRes.body)["message"] == "Successfully logged out") {
         await storage.delete(key: "token");
+        Provider.of<User>(context, listen: false).setUser(User());
       }
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => SigninScreen()));

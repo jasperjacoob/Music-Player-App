@@ -59,7 +59,6 @@ class User {
     return User(
       id: map['id'].toInt() as int,
       name: map['name'] as String,
-      token: map['token'] as String,
       email: map['email'] as String,
       email_verified_at: map['email_verified_at'] as String,
       is_admin: map['is_admin'] as String,
