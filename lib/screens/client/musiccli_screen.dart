@@ -139,6 +139,13 @@ class _MusiccliScreenState extends State<MusiccliScreen>
                         )),
                     child: Column(
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'SM SUPERMALLS',
+                            style: Theme.of(context).textTheme.headline3,
+                          ),
+                        ),
                         Slider(
                           value: value,
                           onChangeEnd: onChangedDragEnd,
@@ -169,6 +176,7 @@ class _MusiccliScreenState extends State<MusiccliScreen>
                                   player.playing
                                       ? Icons.pause
                                       : Icons.play_arrow,
+                                  size: 32,
                                 ))),
                       ],
                     ),

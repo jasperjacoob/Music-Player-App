@@ -65,6 +65,7 @@ Widget buildMenuItem({
   VoidCallback? onClicked,
 }) {
   return ListTile(
+    selectedTileColor: Colors.blue,
     leading: Icon(
       icon,
       color: onTertiary,
