@@ -60,7 +60,9 @@ class User {
       id: map['id'].toInt() as int,
       name: map['name'] as String,
       email: map['email'] as String,
-      email_verified_at: map['email_verified_at'] as String,
+      email_verified_at: map['email_verified_at'] == null
+          ? null
+          : map['email_verified_at'] as String,
       is_admin: map['is_admin'] as String,
       created_at: map['created_at'] as String,
       updated_at: map['updated_at'] as String,

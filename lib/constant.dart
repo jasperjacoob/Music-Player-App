@@ -7,12 +7,16 @@ const margin = EdgeInsets.all(8.0);
 const brightness = Brightness.light;
 const dark = Brightness.dark;
 const background = Color.fromARGB(255, 245, 245, 245);
+
 const primary = Color.fromARGB(255, 106, 209, 255);
 const secondary = Colors.white;
+
 const onPrimary = Color.fromARGB(255, 0, 104, 173);
 const onSecondary = Colors.black;
+
 const error = Color.fromRGBO(255, 0, 0, 1);
 const onError = Color.fromARGB(255, 255, 15, 15);
+
 const onBackground = Color.fromARGB(255, 235, 235, 235);
 const surface = Color.fromARGB(0, 66, 66, 65);
 const onSurface = Color.fromARGB(90, 66, 66, 65);
