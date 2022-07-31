@@ -10,7 +10,7 @@ import 'package:http/http.dart';
 import 'package:musicplayer/screens/auth/loading_screen.dart';
 import 'package:musicplayer/screens/auth/signin_screen.dart';
 import 'package:musicplayer/screens/client/musiccli_screen.dart';
-import 'package:musicplayer/screens/client/signincli_screen.dart';
+
 import 'package:provider/provider.dart';
 
 import '../model/user.dart';

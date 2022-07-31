@@ -72,11 +72,10 @@ class _FblivecliScreenState extends State<FblivecliScreen> {
               return Scaffold(
                 backgroundColor: orientation == Orientation.landscape
                     ? Colors.black
-                    : Colors.white,
+                    : onBackground,
                 drawer: ClientDrawerWidget(),
-                appBar: orientation == Orientation.portrait
-                    ? ClientAppBar(title: "Fb Live")
-                    : null,
+                appBar:
+                    orientation == Orientation.portrait ? ClientAppBar() : null,
                 body: Padding(
                   padding: orientation == Orientation.landscape
                       ? EdgeInsets.zero

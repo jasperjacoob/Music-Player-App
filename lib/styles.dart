@@ -33,7 +33,6 @@ ThemeData get defaultThemeData {
             fontWeight: FontWeight.bold,
             fontSize: 16.0,
             color: onTertiary,
-            decoration: TextDecoration.underline,
             fontFamily: 'Inter'),
         headline4: TextStyle(
             fontWeight: FontWeight.bold,
@@ -46,9 +45,7 @@ ThemeData get defaultThemeData {
         bodyText2:
             TextStyle(color: onTertiary, fontSize: 12.0, fontFamily: 'Inter'),
         button: TextStyle(
-            color: background,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Inter'),
+            color: secondary, fontWeight: FontWeight.bold, fontFamily: 'Inter'),
       ),
       buttonTheme: ButtonThemeData(
           shape: RoundedRectangleBorder(
@@ -64,9 +61,8 @@ ThemeData get defaultThemeData {
         shadowColor: Colors.transparent,
         minimumSize: const Size.fromHeight(17),
       )),
-      inputDecorationTheme: InputDecorationTheme(
-        border: InputBorder.none,
+      inputDecorationTheme: const InputDecorationTheme(
         filled: true,
-        fillColor: Colors.grey.shade300,
+        fillColor: background,
       ));
 }
