@@ -45,8 +45,8 @@ class _FblivecliScreenState extends State<FblivecliScreen> {
       if (resMes.toString().contains("No FB Live Event")) {
         return resMes;
       }
-      resMes = resMes.replaceAll('height="314"', 'height="100%"');
-      resMes = resMes.replaceAll('width="560"', 'width="100%"');
+      resMes = resMes.replaceAll(RegExp('height="[0-9]+"'), 'height="100%"');
+      resMes = resMes.replaceAll(RegExp('width="[0-9]+"'), 'width="100%"');
 
       return resMes;
     }
@@ -85,9 +85,6 @@ class _FblivecliScreenState extends State<FblivecliScreen> {
                         SystemUiMode.immersiveSticky);
 
                 return Scaffold(
-                  backgroundColor: orientation == Orientation.landscape
-                      ? Colors.black
-                      : onBackground,
                   drawer: ClientDrawerWidget(currentSelected: fbliveRoute),
                   appBar: orientation == Orientation.portrait
                       ? ClientAppBar()

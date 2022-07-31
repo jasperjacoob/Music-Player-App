@@ -44,8 +44,8 @@ class _VodcastcliScreenState extends State<VodcastcliScreen> {
       if (resMes.toString().contains("No Vodcast")) {
         return resMes;
       }
-      resMes = resMes.replaceAll('height="314"', 'height="100%"');
-      resMes = resMes.replaceAll('width="560"', 'width="100%"');
+      resMes = resMes.replaceAll(RegExp('height="[0-9]+"'), 'height="100%"');
+      resMes = resMes.replaceAll(RegExp('width="[0-9]+"'), 'width="100%"');
 
       return resMes;
     }

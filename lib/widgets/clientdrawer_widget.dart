@@ -153,7 +153,7 @@ Future<void> _showMyLogoutDialog(context, storage, currentToken) async {
 Future<void> _showMyLoadingDialog(context) async {
   return showDialog<void>(
     context: context,
-    barrierDismissible: true, // user must tap button!
+    barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
         title: Text(
@@ -243,6 +243,9 @@ void onPressed(currentToken, storage, context) async {
   if (jsonDecode(logoutRes.body)["message"] == "Successfully logged out") {
     await storage.delete(key: "token");
     Provider.of<User>(context, listen: false).setUser(User());
+  } else {
+    Navigator.of(context).pop();
+    return;
   }
   Navigator.of(context).pushNamedAndRemoveUntil(signinRoute, (route) => false);
 }
