@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 //default padding-margin use in app
 const padding = EdgeInsets.symmetric(horizontal: 10, vertical: 20);
+const paddingDrawer = EdgeInsets.symmetric(horizontal: 0, vertical: 20);
 const margin = EdgeInsets.all(8.0);
 //colors use in app
 const brightness = Brightness.light;
@@ -30,5 +31,9 @@ const onPodcast = Color.fromARGB(255, 254, 242, 218);
 
 const playerUrl = "http://stream.zeno.fm/a788tyayyuhvv";
 //routes
-const dashboardRoute = '/dashboard';
+const musicRoute = '/music';
 const signinRoute = '/login';
+
+const vodcastRoute = '/vodcast';
+const podcastRoute = '/podcast';
+const fbliveRoute = '/fblive';

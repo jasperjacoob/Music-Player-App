@@ -87,7 +87,7 @@ class _MusiccliScreenState extends State<MusiccliScreen>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer: ClientDrawerWidget(),
+        drawer: ClientDrawerWidget(currentSelected: musicRoute),
         backgroundColor: primary,
         body: Builder(builder: (context) {
           return Column(

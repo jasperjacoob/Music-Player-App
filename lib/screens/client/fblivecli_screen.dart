@@ -45,8 +45,8 @@ class _FblivecliScreenState extends State<FblivecliScreen> {
       if (resMes.toString().contains("No FB Live Event")) {
         return resMes;
       }
-      resMes = resMes.replaceAll('height="314"', 'height="100%"');
-      resMes = resMes.replaceAll('width="560"', 'width="100%"');
+      resMes = resMes.replaceAll(RegExp('height="[0-9]+"'), 'height="100%"');
+      resMes = resMes.replaceAll(RegExp('width="[0-9]+"'), 'width="100%"');
 
       return resMes;
     }
@@ -56,47 +56,61 @@ class _FblivecliScreenState extends State<FblivecliScreen> {
         builder: (context, AsyncSnapshot<String> snapshot) {
           debugPrint(snapshot.data);
           if (snapshot.connectionState == ConnectionState.done) {
-            return OrientationBuilder(builder: (context, orientation) {
-              orientation == Orientation.portrait
-                  ? SystemChrome.setEnabledSystemUIMode(
-                      SystemUiMode.manual,
-                      overlays: [
-                        SystemUiOverlay
-                            .top, // Shows Status bar and hides Navigation bar
-                        SystemUiOverlay.bottom
-                      ],
-                    )
-                  : SystemChrome.setEnabledSystemUIMode(
-                      SystemUiMode.immersiveSticky);
-
+            if (snapshot.data.toString().contains("No FB Live Event")) {
               return Scaffold(
-                backgroundColor: orientation == Orientation.landscape
-                    ? Colors.black
-                    : onBackground,
-                drawer: ClientDrawerWidget(),
-                appBar:
-                    orientation == Orientation.portrait ? ClientAppBar() : null,
-                body: Padding(
-                  padding: orientation == Orientation.landscape
-                      ? EdgeInsets.zero
-                      : EdgeInsets.only(top: 50),
-                  child: FractionallySizedBox(
-                    heightFactor:
-                        orientation == Orientation.landscape ? 1 : 0.5,
-                    child: WebView(
-                      javascriptMode: JavascriptMode.unrestricted,
-                      zoomEnabled: false,
-                      onWebViewCreated: ((controller) => {}),
-                      initialUrl: Uri.dataFromString(
-                              '<html><body style="margin:0,padding:0">${snapshot.data}</body></html>',
-                              base64: true,
-                              mimeType: 'text/html')
-                          .toString(),
-                    ),
-                  ),
+                drawer: ClientDrawerWidget(currentSelected: fbliveRoute),
+                appBar: ClientAppBar(),
+                body: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(snapshot.data.toString(),
+                          style: Theme.of(context).textTheme.headline2),
+                    )
+                  ],
                 ),
               );
-            });
+            } else {
+              return OrientationBuilder(builder: (context, orientation) {
+                orientation == Orientation.portrait
+                    ? SystemChrome.setEnabledSystemUIMode(
+                        SystemUiMode.manual,
+                        overlays: [
+                          SystemUiOverlay
+                              .top, // Shows Status bar and hides Navigation bar
+                          SystemUiOverlay.bottom
+                        ],
+                      )
+                    : SystemChrome.setEnabledSystemUIMode(
+                        SystemUiMode.immersiveSticky);
+
+                return Scaffold(
+                  drawer: ClientDrawerWidget(currentSelected: fbliveRoute),
+                  appBar: orientation == Orientation.portrait
+                      ? ClientAppBar()
+                      : null,
+                  body: Padding(
+                    padding: orientation == Orientation.landscape
+                        ? EdgeInsets.zero
+                        : EdgeInsets.only(top: 50),
+                    child: FractionallySizedBox(
+                      heightFactor:
+                          orientation == Orientation.landscape ? 1 : 0.5,
+                      child: WebView(
+                        javascriptMode: JavascriptMode.unrestricted,
+                        zoomEnabled: false,
+                        onWebViewCreated: ((controller) => {}),
+                        initialUrl: Uri.dataFromString(
+                                '<html><body style="margin:0,padding:0">${snapshot.data}</body></html>',
+                                base64: true,
+                                mimeType: 'text/html')
+                            .toString(),
+                      ),
+                    ),
+                  ),
+                );
+              });
+            }
           }
           return LoadingScreen();
         });
