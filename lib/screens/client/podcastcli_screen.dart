@@ -40,7 +40,7 @@ class _PodcastcliScreenState extends State<PodcastcliScreen> {
           Uri.parse("http://www.avsoundstation.com/api/podcast"),
           headers: userHeader);
       String resMes = jsonDecode(res.body)['message'];
-      if (resMes.toString().contains("No Podcast Event")) {
+      if (resMes.toString().contains("No Podcast")) {
         return resMes;
       }
       resMes = resMes.replaceAll('height="314"', 'height="100%"');
@@ -54,47 +54,65 @@ class _PodcastcliScreenState extends State<PodcastcliScreen> {
         builder: (context, AsyncSnapshot<String> snapshot) {
           debugPrint(snapshot.data);
           if (snapshot.connectionState == ConnectionState.done) {
-            return OrientationBuilder(builder: (context, orientation) {
-              orientation == Orientation.portrait
-                  ? SystemChrome.setEnabledSystemUIMode(
-                      SystemUiMode.manual,
-                      overlays: [
-                        SystemUiOverlay
-                            .top, // Shows Status bar and hides Navigation bar
-                        SystemUiOverlay.bottom
-                      ],
-                    )
-                  : SystemChrome.setEnabledSystemUIMode(
-                      SystemUiMode.immersiveSticky);
-
+            if (snapshot.data.toString().contains("No Podcast")) {
               return Scaffold(
-                backgroundColor: orientation == Orientation.landscape
-                    ? Colors.black
-                    : onBackground,
-                drawer: ClientDrawerWidget(),
-                appBar:
-                    orientation == Orientation.portrait ? ClientAppBar() : null,
-                body: Padding(
-                  padding: orientation == Orientation.landscape
-                      ? EdgeInsets.zero
-                      : EdgeInsets.only(top: 50),
-                  child: FractionallySizedBox(
-                    heightFactor:
-                        orientation == Orientation.landscape ? 1 : 0.5,
-                    child: WebView(
-                      javascriptMode: JavascriptMode.unrestricted,
-                      zoomEnabled: false,
-                      onWebViewCreated: ((controller) => {}),
-                      initialUrl: Uri.dataFromString(
-                              '<html><body style="margin:0,padding:0">${snapshot.data}</body></html>',
-                              base64: true,
-                              mimeType: 'text/html')
-                          .toString(),
-                    ),
-                  ),
+                drawer: ClientDrawerWidget(currentSelected: podcastRoute),
+                appBar: ClientAppBar(),
+                body: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(snapshot.data.toString(),
+                          style: Theme.of(context).textTheme.headline2),
+                    )
+                  ],
                 ),
               );
-            });
+            } else {
+              debugPrint("WEB");
+              return OrientationBuilder(builder: (context, orientation) {
+                orientation == Orientation.portrait
+                    ? SystemChrome.setEnabledSystemUIMode(
+                        SystemUiMode.manual,
+                        overlays: [
+                          SystemUiOverlay
+                              .top, // Shows Status bar and hides Navigation bar
+                          SystemUiOverlay.bottom
+                        ],
+                      )
+                    : SystemChrome.setEnabledSystemUIMode(
+                        SystemUiMode.immersiveSticky);
+
+                return Scaffold(
+                  backgroundColor: orientation == Orientation.landscape
+                      ? Colors.black
+                      : onBackground,
+                  drawer: ClientDrawerWidget(currentSelected: podcastRoute),
+                  appBar: orientation == Orientation.portrait
+                      ? ClientAppBar()
+                      : null,
+                  body: Padding(
+                    padding: orientation == Orientation.landscape
+                        ? EdgeInsets.zero
+                        : EdgeInsets.only(top: 50),
+                    child: FractionallySizedBox(
+                      heightFactor:
+                          orientation == Orientation.landscape ? 1 : 0.5,
+                      child: WebView(
+                        javascriptMode: JavascriptMode.unrestricted,
+                        zoomEnabled: false,
+                        onWebViewCreated: ((controller) => {}),
+                        initialUrl: Uri.dataFromString(
+                                '<html><body style="margin:0,padding:0">${snapshot.data}</body></html>',
+                                base64: true,
+                                mimeType: 'text/html')
+                            .toString(),
+                      ),
+                    ),
+                  ),
+                );
+              });
+            }
           }
           return LoadingScreen();
         });

@@ -163,7 +163,7 @@ class _SigninScreenState extends State<SigninScreen> {
               child: const Text('Okay'),
               onPressed: () {
                 Navigator.of(context)
-                    .pushNamedAndRemoveUntil(dashboardRoute, (route) => false);
+                    .pushNamedAndRemoveUntil(musicRoute, (route) => false);
               },
             ),
           ],
