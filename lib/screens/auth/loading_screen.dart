@@ -24,9 +24,9 @@ class LoadingScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline3,
                   ),
                 ),
-                const SpinKitFadingCircle(
+                const SpinKitRing(
                   size: 35.0,
-                  color: onTertiary,
+                  color: primary,
                 ),
               ],
             ),
