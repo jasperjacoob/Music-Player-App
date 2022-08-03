@@ -41,14 +41,18 @@ class _FblivecliScreenState extends State<FblivecliScreen> {
       http.Response res = await http.get(
           Uri.parse("http://www.avsoundstation.com/api/fb-live"),
           headers: userHeader);
-      String resMes = jsonDecode(res.body)['message'];
-      if (resMes.toString().contains("No FB Live Event")) {
-        return resMes;
-      }
-      resMes = resMes.replaceAll(RegExp('height="[0-9]+"'), 'height="100%"');
-      resMes = resMes.replaceAll(RegExp('width="[0-9]+"'), 'width="100%"');
+      Map<String, dynamic> resMes = jsonDecode(res.body);
 
-      return resMes;
+      if (resMes.containsKey("message")) {
+        return resMes['message'];
+      }
+
+      resMes["link"] =
+          resMes["link"].replaceAll(RegExp('height="[0-9]+"'), 'height="100%"');
+      resMes["link"] =
+          resMes["link"].replaceAll(RegExp('width="[0-9]+"'), 'width="100%"');
+
+      return resMes['link'];
     }
 
     return FutureBuilder(
@@ -59,7 +63,7 @@ class _FblivecliScreenState extends State<FblivecliScreen> {
             if (snapshot.data.toString().contains("No FB Live Event")) {
               return Scaffold(
                 drawer: ClientDrawerWidget(currentSelected: fbliveRoute),
-                appBar: ClientAppBar(),
+                appBar: ClientAppBar(title: "Fb Live"),
                 body: Column(
                   children: [
                     Padding(
@@ -87,7 +91,7 @@ class _FblivecliScreenState extends State<FblivecliScreen> {
                 return Scaffold(
                   drawer: ClientDrawerWidget(currentSelected: fbliveRoute),
                   appBar: orientation == Orientation.portrait
-                      ? ClientAppBar()
+                      ? ClientAppBar(title: "Fb Live")
                       : null,
                   body: Padding(
                     padding: orientation == Orientation.landscape
