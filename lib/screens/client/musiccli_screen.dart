@@ -7,8 +7,9 @@ import 'package:musicplayer/provider/entertainmentprovider.dart';
 import 'package:audio_session/audio_session.dart';
 import 'dart:developer';
 import 'package:just_audio/just_audio.dart';
+import 'package:http/http.dart' as http;
 import 'package:musicplayer/widgets/clientdrawer_widget.dart';
-
+import '../../model/user.dart';
 import 'package:provider/provider.dart';
 
 class MusiccliScreen extends StatefulWidget {
@@ -85,6 +86,19 @@ class _MusiccliScreenState extends State<MusiccliScreen>
   void animatedPlayer() {}
   @override
   Widget build(BuildContext context) {
+    Future<String> getImage() async {
+      String? currentToken = context.read<User>().token;
+      Map<String, String> userHeader = {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $currentToken'
+      };
+      http.Response res = await http.get(
+          Uri.parse("http://www.avsoundstation.com/api/image-music-background"),
+          headers: userHeader);
+      return res.body;
+    }
+
     return SafeArea(
       child: Scaffold(
         drawer: ClientDrawerWidget(currentSelected: musicRoute),
@@ -114,17 +128,25 @@ class _MusiccliScreenState extends State<MusiccliScreen>
                             ),
                           ),
                         ),
-                        Flexible(
-                            flex: 3,
-                            child: Container(
-                              margin: const EdgeInsets.symmetric(
-                                horizontal: 8.0,
-                              ),
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/Train-Japan.gif'))),
-                            ))
+                        FutureBuilder<String>(
+                            future: getImage(),
+                            builder: (context, AsyncSnapshot<String> snapshot) {
+                              return Flexible(
+                                  flex: 3,
+                                  child: Container(
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 8.0,
+                                    ),
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: snapshot.data == null
+                                                ? AssetImage(
+                                                        'assets/images/Train-Japan.gif')
+                                                    as ImageProvider
+                                                : NetworkImage(
+                                                    snapshot.data as String))),
+                                  ));
+                            })
                       ],
                     ),
                   ),

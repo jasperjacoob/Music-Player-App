@@ -39,14 +39,18 @@ class _PodcastcliScreenState extends State<PodcastcliScreen> {
       http.Response res = await http.get(
           Uri.parse("http://www.avsoundstation.com/api/podcast"),
           headers: userHeader);
-      String resMes = jsonDecode(res.body)['message'];
-      if (resMes.toString().contains("No Podcast")) {
-        return resMes;
-      }
-      resMes = resMes.replaceAll(RegExp('height="[0-9]+"'), 'height="100%"');
-      resMes = resMes.replaceAll(RegExp('width="[0-9]+"'), 'width="100%"');
+      Map<String, dynamic> resMes = jsonDecode(res.body);
 
-      return resMes;
+      if (resMes.containsKey("message")) {
+        return resMes['message'];
+      }
+
+      resMes["link"] =
+          resMes["link"].replaceAll(RegExp('height="[0-9]+"'), 'height="100%"');
+      resMes["link"] =
+          resMes["link"].replaceAll(RegExp('width="[0-9]+"'), 'width="100%"');
+
+      return resMes['link'];
     }
 
     return FutureBuilder(
@@ -57,7 +61,7 @@ class _PodcastcliScreenState extends State<PodcastcliScreen> {
             if (snapshot.data.toString().contains("No Podcast")) {
               return Scaffold(
                 drawer: ClientDrawerWidget(currentSelected: podcastRoute),
-                appBar: ClientAppBar(),
+                appBar: ClientAppBar(title: "Podcast"),
                 body: Column(
                   children: [
                     Padding(
@@ -69,7 +73,6 @@ class _PodcastcliScreenState extends State<PodcastcliScreen> {
                 ),
               );
             } else {
-              debugPrint("WEB");
               return OrientationBuilder(builder: (context, orientation) {
                 orientation == Orientation.portrait
                     ? SystemChrome.setEnabledSystemUIMode(
@@ -89,7 +92,7 @@ class _PodcastcliScreenState extends State<PodcastcliScreen> {
                       : onBackground,
                   drawer: ClientDrawerWidget(currentSelected: podcastRoute),
                   appBar: orientation == Orientation.portrait
-                      ? ClientAppBar()
+                      ? ClientAppBar(title: "Podcast")
                       : null,
                   body: Padding(
                     padding: orientation == Orientation.landscape

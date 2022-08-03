@@ -38,6 +38,10 @@ class _AuthWidgetState extends State<AuthWidget> {
         Response userRes = await http.get(
             Uri.parse("http://www.avsoundstation.com/api/user"),
             headers: requestHeaders);
+        if (userRes.body.toString().contains("Sign In")) {
+          await storage.delete(key: "token");
+          return "No Data";
+        }
         User currentUser = User.fromMap(jsonDecode(userRes.body));
         currentUser.token = currentToken;
         Provider.of<User>(context, listen: false).setUser(currentUser);

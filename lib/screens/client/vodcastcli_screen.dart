@@ -40,14 +40,18 @@ class _VodcastcliScreenState extends State<VodcastcliScreen> {
       http.Response res = await http.get(
           Uri.parse("http://www.avsoundstation.com/api/vodcast"),
           headers: userHeader);
-      String resMes = jsonDecode(res.body)['message'];
-      if (resMes.toString().contains("No Vodcast")) {
-        return resMes;
-      }
-      resMes = resMes.replaceAll(RegExp('height="[0-9]+"'), 'height="100%"');
-      resMes = resMes.replaceAll(RegExp('width="[0-9]+"'), 'width="100%"');
+      Map<String, dynamic> resMes = jsonDecode(res.body);
 
-      return resMes;
+      if (resMes.containsKey("message")) {
+        return resMes['message'];
+      }
+
+      resMes["link"] =
+          resMes["link"].replaceAll(RegExp('height="[0-9]+"'), 'height="100%"');
+      resMes["link"] =
+          resMes["link"].replaceAll(RegExp('width="[0-9]+"'), 'width="100%"');
+
+      return resMes['link'];
     }
 
     return FutureBuilder(
@@ -58,7 +62,7 @@ class _VodcastcliScreenState extends State<VodcastcliScreen> {
             if (snapshot.data.toString().contains("No Vodcast")) {
               return Scaffold(
                 drawer: ClientDrawerWidget(currentSelected: vodcastRoute),
-                appBar: ClientAppBar(),
+                appBar: ClientAppBar(title: "Vodcast"),
                 body: Column(
                   children: [
                     Padding(
@@ -89,7 +93,7 @@ class _VodcastcliScreenState extends State<VodcastcliScreen> {
                       : onBackground,
                   drawer: ClientDrawerWidget(currentSelected: vodcastRoute),
                   appBar: orientation == Orientation.portrait
-                      ? ClientAppBar()
+                      ? ClientAppBar(title: "Vodcast")
                       : null,
                   body: Padding(
                     padding: orientation == Orientation.landscape
