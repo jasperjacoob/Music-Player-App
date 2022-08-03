@@ -167,13 +167,16 @@ Future<void> _showMyLoadingDialog(context) async {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                "Logging out",
-                style: Theme.of(context).textTheme.bodyText1,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Logging out",
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
               ),
-              const SpinKitFadingCircle(
+              const SpinKitRing(
                 size: 35.0,
-                color: onTertiary,
+                color: primary,
               ),
             ],
           ),
@@ -191,8 +194,8 @@ Widget buildMenuItem(
   return Container(
     decoration: BoxDecoration(
         border: Border(
-            left: BorderSide(
-                color: selected ? Colors.blue : background, width: 10))),
+            left:
+                BorderSide(color: selected ? primary : background, width: 10))),
     child: ListTile(
       leading: Icon(
         icon,
