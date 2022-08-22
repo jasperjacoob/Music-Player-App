@@ -89,7 +89,7 @@ class _PodcastcliScreenState extends State<PodcastcliScreen> {
                 return Scaffold(
                   backgroundColor: orientation == Orientation.landscape
                       ? Colors.black
-                      : onBackground,
+                      : background,
                   drawer: ClientDrawerWidget(currentSelected: podcastRoute),
                   appBar: orientation == Orientation.portrait
                       ? ClientAppBar(title: "Podcast")

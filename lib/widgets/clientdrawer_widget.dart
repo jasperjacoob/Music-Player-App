@@ -199,11 +199,11 @@ Widget buildMenuItem(
     child: ListTile(
       leading: Icon(
         icon,
-        color: onTertiary,
+        color: onSecondaryText,
       ),
       title: Text(
         text,
-        style: TextStyle(color: onTertiary),
+        style: const TextStyle(color: onSecondaryText),
       ),
       hoverColor: hoverColor,
       onTap: onClicked,

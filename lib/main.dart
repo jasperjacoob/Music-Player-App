@@ -31,6 +31,6 @@ class MyApp extends StatelessWidget {
             title: 'Flutter Demo',
             theme: defaultThemeData,
             onGenerateRoute: generateRoute,
-            home: AuthWidget()));
+            home: SigninScreen()));
   }
 }

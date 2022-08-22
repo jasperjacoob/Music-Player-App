@@ -5,13 +5,18 @@ import 'package:musicplayer/constant.dart';
 class ClientAppBar extends StatelessWidget implements PreferredSizeWidget {
   String title;
   ClientAppBar({Key? key, required this.title}) : super(key: key);
+
   final AppBar appBar = AppBar();
   @override
   Size get preferredSize => Size.fromHeight(appBar.preferredSize.height);
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title),
+      centerTitle: true,
+      title: Text(
+        title,
+        style: const TextStyle(color: onPrimaryText),
+      ),
       leading: Builder(builder: (context) {
         return IconButton(
             onPressed: () => Scaffold.of(context).openDrawer(),

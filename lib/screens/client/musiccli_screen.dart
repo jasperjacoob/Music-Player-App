@@ -102,7 +102,7 @@ class _MusiccliScreenState extends State<MusiccliScreen>
     return SafeArea(
       child: Scaffold(
         drawer: ClientDrawerWidget(currentSelected: musicRoute),
-        backgroundColor: primary,
+        backgroundColor: background,
         body: Builder(builder: (context) {
           return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -151,10 +151,11 @@ class _MusiccliScreenState extends State<MusiccliScreen>
                     ),
                   ),
                 ),
-                Flexible(
+                Container(
+                  height: 150,
                   child: Container(
                     decoration: const BoxDecoration(
-                        color: Colors.white,
+                        color: primary,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30),
@@ -165,13 +166,17 @@ class _MusiccliScreenState extends State<MusiccliScreen>
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             'SM SUPERMALLS',
-                            style: Theme.of(context).textTheme.headline3,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline3
+                                ?.copyWith(color: background),
                           ),
                         ),
                         Slider(
                           value: value,
                           onChangeEnd: onChangedDragEnd,
                           onChanged: onChanged,
+                          activeColor: background,
                         ),
                         GestureDetector(
                             onTap: () {
@@ -199,6 +204,7 @@ class _MusiccliScreenState extends State<MusiccliScreen>
                                       ? Icons.pause
                                       : Icons.play_arrow,
                                   size: 32,
+                                  color: background,
                                 ))),
                       ],
                     ),

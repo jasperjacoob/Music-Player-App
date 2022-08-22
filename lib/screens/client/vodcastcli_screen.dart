@@ -90,7 +90,7 @@ class _VodcastcliScreenState extends State<VodcastcliScreen> {
                 return Scaffold(
                   backgroundColor: orientation == Orientation.landscape
                       ? Colors.black
-                      : onBackground,
+                      : background,
                   drawer: ClientDrawerWidget(currentSelected: vodcastRoute),
                   appBar: orientation == Orientation.portrait
                       ? ClientAppBar(title: "Vodcast")

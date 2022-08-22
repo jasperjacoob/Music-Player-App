@@ -4,7 +4,7 @@ import 'package:musicplayer/constant.dart';
 ThemeData get defaultThemeData {
   return ThemeData.light().copyWith(
       canvasColor: background,
-      scaffoldBackgroundColor: onBackground,
+      scaffoldBackgroundColor: secondary,
       appBarTheme: const AppBarTheme(backgroundColor: secondary),
       colorScheme: const ColorScheme(
           brightness: brightness,
@@ -62,7 +62,5 @@ ThemeData get defaultThemeData {
         minimumSize: const Size.fromHeight(17),
       )),
       inputDecorationTheme: const InputDecorationTheme(
-        filled: true,
-        fillColor: background,
-      ));
+          filled: true, fillColor: background, border: OutlineInputBorder()));
 }

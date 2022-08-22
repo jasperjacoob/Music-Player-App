@@ -20,6 +20,8 @@ class SigninScreen extends StatefulWidget {
 class _SigninScreenState extends State<SigninScreen> {
   TextEditingController emailController = TextEditingController(text: "");
   TextEditingController passwordController = TextEditingController(text: "");
+  String password = '';
+  bool isPasswordVisible = false;
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   bool isenabled = true;
   @override
@@ -27,26 +29,33 @@ class _SigninScreenState extends State<SigninScreen> {
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: background,
           body: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Expanded(
-                  child: ClipPath(
-                    clipper: ClipBox(),
-                    child: Container(
-                      padding: const EdgeInsets.only(top: 8, bottom: 40),
-                      color: primary,
-                      child: Container(
-                        padding: const EdgeInsets.all(80),
-                        child: Image.asset(
-                          'assets/images/sm.png',
-                        ),
-                      ),
+                Column(children: [
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 8.0),
+                    height: 180,
+                    width: 180,
+                    child: Image.asset(
+                      'assets/images/sm.png',
+                      fit: BoxFit.cover,
                     ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Sign In",
+                      style: Theme.of(context).textTheme.headline2,
+                    ),
+                  ),
+                ]),
                 Container(
                   padding: const EdgeInsets.symmetric(
                     vertical: 16,
@@ -60,14 +69,8 @@ class _SigninScreenState extends State<SigninScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Sign In",
-                            style: Theme.of(context).textTheme.headline2,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 12.0),
                           child: TextFormField(
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -90,7 +93,8 @@ class _SigninScreenState extends State<SigninScreen> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 12.0),
                           child: TextFormField(
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -100,31 +104,42 @@ class _SigninScreenState extends State<SigninScreen> {
                             style: const TextStyle(color: onSecondary),
                             controller: passwordController,
                             keyboardType: TextInputType.visiblePassword,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               hintText: "Password",
                               labelText: "Password",
+                              suffixIcon: IconButton(
+                                onPressed: (() => setState(
+                                      () => isPasswordVisible =
+                                          !isPasswordVisible,
+                                    )),
+                                icon: isPasswordVisible
+                                    ? const Icon(Icons.visibility_off)
+                                    : const Icon(Icons.visibility),
+                              ),
                             ),
+                            obscureText: isPasswordVisible,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 12.0),
                           child: ElevatedButton(
                               onPressed: onPressed,
-                              child: Text(
-                                "Sign in",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline3
-                                    ?.copyWith(color: Colors.white),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text(
+                                  "Sign in",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline3
+                                      ?.copyWith(color: Colors.white),
+                                ),
                               )),
                         ),
                       ],
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 50,
-                )
               ])),
     );
   }
