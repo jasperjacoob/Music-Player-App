@@ -8,7 +8,7 @@ ThemeData get defaultThemeData {
       appBarTheme: const AppBarTheme(backgroundColor: secondary),
       colorScheme: const ColorScheme(
           brightness: brightness,
-          primary: onPrimary,
+          primary: primary,
           onPrimary: onPrimary,
           secondary: secondary,
           onSecondary: onSecondary,
