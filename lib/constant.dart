@@ -9,10 +9,10 @@ const brightness = Brightness.light;
 const dark = Brightness.dark;
 const background = Color.fromARGB(255, 255, 255, 255);
 
-const primary = Color.fromARGB(255, 59, 130, 246);
+const onPrimary = Color.fromARGB(255, 59, 130, 246);
 const secondary = Colors.white;
 
-const onPrimary = Color.fromARGB(255, 29, 78, 216);
+const primary = Color.fromARGB(255, 29, 78, 216);
 const onSecondary = Colors.black;
 
 const error = Color.fromRGBO(255, 0, 0, 1);
