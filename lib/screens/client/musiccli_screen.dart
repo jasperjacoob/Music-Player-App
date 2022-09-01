@@ -177,6 +177,7 @@ class _MusiccliScreenState extends State<MusiccliScreen>
                           onChangeEnd: onChangedDragEnd,
                           onChanged: onChanged,
                           activeColor: background,
+                          inactiveColor: onPrimary,
                         ),
                         GestureDetector(
                             onTap: () {

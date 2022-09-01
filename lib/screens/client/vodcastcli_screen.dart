@@ -66,7 +66,8 @@ class _VodcastcliScreenState extends State<VodcastcliScreen> {
                 body: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 22.0),
                       child: Text(snapshot.data.toString(),
                           style: Theme.of(context).textTheme.headline2),
                     )
